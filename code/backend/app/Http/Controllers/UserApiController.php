@@ -34,7 +34,8 @@ class UserApiController extends Controller
             'role'=>$request->input('role'),
             'image'=>$imagePath
         ]);
-
+        
+        event(new UserLoggedIn($user));
         // Auth::login($user);
         return response()->json([
             'message'=>'user registered successfully',
@@ -58,7 +59,6 @@ class UserApiController extends Controller
         }
 
         Auth::login($user);
-        event(new UserLoggedIn($user));
         Log::info( 'user logged succesfully'.$user);
         return response()->json([
             'message'=>'user logged in successfully',

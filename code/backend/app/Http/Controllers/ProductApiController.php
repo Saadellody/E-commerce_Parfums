@@ -48,7 +48,7 @@ class ProductApiController extends Controller
             $image=$request->file('image')->store('images','public');
             
         }
-        Product::create([
+        $product =Product::create([
                 'name'=>$request->input('name'),
                 'description'=>$request->input('description'),
                 'price'=>$request->input('price'),
@@ -58,9 +58,8 @@ class ProductApiController extends Controller
     
         ]);
 
-        return response()->json([
-            'message'=>'a product has been created successfully'
-        ],201);
+        return response()->json(new ProductResource($product), 201);
+        
     }
 
     public function update($id ,Request $request){
@@ -71,7 +70,7 @@ class ProductApiController extends Controller
             'price'=>'required|numeric|min:0.01',
             'stock_quantity'=>'required|integer|min:0',
             'category'=>'required|string|max:255',
-            'image'=>'nullable|image|mimes:jpg,jpeg,png,svg,gif,webp,avif|max:2048'
+            'image'=>'nullable|mimes:jpg,jpeg,png,svg,gif,webp,avif|max:2048'
             
         ]);
 
@@ -103,9 +102,7 @@ class ProductApiController extends Controller
             $product->save();
         }
 
-        return response()->json([
-            'message'=>'a record in model product has been updated successfully'
-        ],200);
+        return response()->json(new ProductResource($product), 200);
     }
 
     public function show($id){

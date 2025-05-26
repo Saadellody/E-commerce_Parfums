@@ -1,0 +1,16 @@
+.signuppage {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  overflow: hidden;
+  user-select: none;
+  /* background:linear-gradient(90deg, #d3f36c, #95f0df); */
+  background-color: white;
+}
+
+.signup {
+  min-height: 80vh;
+}

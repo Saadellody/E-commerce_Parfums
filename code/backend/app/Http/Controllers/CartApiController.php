@@ -37,4 +37,75 @@ class CartApiController extends Controller
         return response()->json(CartItemResource::collection($newproduct), 200);
 
     } 
+    public function updateQuantity(Request $request, $id)
+    {
+        $request->validate([
+            'quantity' => 'required|integer|min:1'
+        ]);
+        
+        $cart = Auth::user()->cart;
+        if(!$cart){
+            return response()->json(['message'=>'cart not found'],404);
+        }
+        
+        $cartItem = $cart->cartItems()->where('product_id', $id)->first();
+        if(!$cartItem){
+            return response()->json(['message'=>'product not found in cart'],404);
+        }
+        
+        $cartItem->quantity = $request->quantity;
+        $cartItem->save();
+        
+        // Return the updated product with quantity
+        $product = $cartItem->product;
+        $product->quantity = $cartItem->quantity;
+        $product->cart_item_id = $cartItem->id;
+        
+        return response()->json(new CartItemResource($product), 200);
+    }
+    
+    public function removeItem($id)
+    {
+        $cart = Auth::user()->cart;
+        if(!$cart){
+            return response()->json(['message'=>'cart not found'],404);
+        }
+        
+        $cartItem = $cart->cartItems()->where('product_id', $id)->first();
+        if(!$cartItem){
+            return response()->json(['message'=>'product not found in cart'],404);
+        }
+        
+        $cartItem->delete();
+        
+        return response()->json(['message'=>'product removed from cart successfully'], 200);
+    }
+    public function clearCart(Request $request)
+{
+    $user = $request->user();
+
+    if (!$user) {
+        return response()->json(['message' => 'Unauthenticated'], 401);
+    }
+
+    // Load user's cart with cartItems
+    $cart = $user->cart;
+
+    if (!$cart) {
+        return response()->json(['message' => 'Cart not found'], 404);
+    }
+
+    try {
+        // Delete all cart items for this cart
+        $cart->cartItems()->delete();
+    } catch (\Exception $e) {
+        return response()->json(['message' => 'Failed to clear cart', 'error' => $e->getMessage()], 500);
+    }
+
+    return response()->json(['message' => 'command passed successfully']);
+}
+
+
+    
+    
 }
