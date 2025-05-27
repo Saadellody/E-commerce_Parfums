@@ -79,3 +79,24 @@ export const fetch_orders = () => async (dispatch) => {
   }
 };
 
+// orderActions.js
+export const FETCH_ALL_ORDERS_REQUEST = "FETCH_ALL_ORDERS_REQUEST";
+export const FETCH_ALL_ORDERS_SUCCESS = "FETCH_ALL_ORDERS_SUCCESS";
+export const FETCH_ALL_ORDERS_FAIL = "FETCH_ALL_ORDERS_FAIL";
+
+export const fetch_all_orders = () => async (dispatch) => {
+  try {
+    dispatch({ type: FETCH_ALL_ORDERS_REQUEST });
+
+    const response = await axios.get("http://localhost:8000/api/admin/orders", {
+      withCredentials: true,
+    });
+
+    dispatch({ type: FETCH_ALL_ORDERS_SUCCESS, payload: response.data });
+  } catch (error) {
+    dispatch({
+      type: FETCH_ALL_ORDERS_FAIL,
+      payload: error.response?.data?.message || error.message,
+    });
+  }
+};

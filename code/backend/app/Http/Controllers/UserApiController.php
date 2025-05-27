@@ -16,6 +16,7 @@ class UserApiController extends Controller
             'name'=>'required|string|max:255',
             'email'=>'required|email|max:255|unique:users',
             'password'=>'required|string|min:8',
+            'numero' => 'required|string|unique:users,numero|regex:/^[0-9]{10}$/',
             'role'=>'required|string|max:255',
             'image'=>'nullable|sometimes|image|mimes:jpg,jpe,gif,png,svg,jpeg,webp|max:2028'
         ]);
@@ -29,7 +30,7 @@ class UserApiController extends Controller
         $user= User::create([
             'name'=>$request->input('name'),
             'email'=>$request->input('email'),
-            'tel'=>$request->input('tel'),
+            'numero'=>$request->input('numero'),
             'password'=>Hash::make($request->input('password')),
             'role'=>$request->input('role'),
             'image'=>$imagePath
@@ -53,6 +54,7 @@ class UserApiController extends Controller
         $user= User::where('email',$request->input('email'))->first();
 
         if(!$user|| !Hash::check($request->input('password'),$user->password)){
+            
             return response()->json([
                 'message'=>'Invalid email or password'
             ],401);

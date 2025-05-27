@@ -54,5 +54,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/order-items/{id}', [OrderItemApiController::class, 'show']);
     Route::put('/order-items/{id}', [OrderItemApiController::class, 'update']);
     Route::delete('/order-items/{id}', [OrderItemApiController::class, 'destroy']);
+
+    Route::get('/admin/orders', [OrderApiController::class, 'fetchAllOrders']);
+    Route::put('/admin/orders/{id}/status', [OrderApiController::class, 'updateOrderStatus']);
+
 });
 

@@ -7,6 +7,7 @@ import { register } from "../../redux/actions/userAction";
 export default function Signup() {
   const [formData, setFormData] = useState({
     name: "",
+    numero: "",
     email: "",
     password: "",
     role: "customer",
@@ -79,7 +80,18 @@ export default function Signup() {
               required
             />
           </div>
-
+          <div className={styles.formgroup}>
+            <label htmlFor="numero">Phone Number</label>
+            <input
+              type="text"
+              id="numero"
+              name="numero"
+              value={formData.numero}
+              onChange={handleChange}
+              placeholder="e.g. 0601020304"
+              required
+            />
+          </div>
           <div className={styles.formgroup}>
             <label htmlFor="password">Password</label>
             <input
