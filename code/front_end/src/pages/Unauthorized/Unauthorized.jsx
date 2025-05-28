@@ -1,17 +1,17 @@
 import React from "react";
-import styles from "./Unauthorized.module.css";
+import styles from "./Unauthorized.module.css"; // Make sure to rename your CSS file too if needed
 import { useNavigate } from "react-router-dom";
 
-export default function Unauthorized() {
+export default function Undefined() {
   const navigate = useNavigate();
 
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <h1 className={styles.code}>403</h1>
-        <h2 className={styles.title}>Unauthorized</h2>
+        <h1 className={styles.code}>404</h1>
+        <h2 className={styles.title}>Page Not Found</h2>
         <p className={styles.message}>
-          Sorry, you don’t have permission to access this page.
+          Sorry, the page you’re looking for doesn’t exist or is undefined.
         </p>
         <button
           className={styles.button}
@@ -21,5 +21,5 @@ export default function Unauthorized() {
         </button>
       </div>
     </div>
-   );
+  );
 }
