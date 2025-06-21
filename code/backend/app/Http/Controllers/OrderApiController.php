@@ -65,7 +65,7 @@ class OrderApiController extends Controller
     public function updateOrderStatus(Request $request, $id)
 {
     $request->validate([
-        'status' => 'in:pending,delivered,shipped,processing,cancelled',
+        'status' => 'in:pending,Delivered,shipped,processing,cancelled',
     ]);
 
     $order = Order::find($id);

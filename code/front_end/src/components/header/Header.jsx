@@ -50,6 +50,12 @@ export default function Header() {
           <div className={styles.buttons}>
             {isAuth ? (
               <>
+                <Link
+                  to="/orders"
+                  className={styles.cartimg}
+                  style={{ marginRight: "1rem" }}>
+                  <img src="order.png" alt="cart" />
+                </Link>
                 <Link to="/cart" className={styles.cartimg}>
                   <img src="cart.svg" alt="cart" />
                 </Link>

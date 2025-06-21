@@ -40,8 +40,9 @@ export default function ProductPage() {
         headers: { "X-XSRF-TOKEN": csrfToken },
         withCredentials: true,
       });
-      setSuccessMessage("✅ Product added to cart successfully!");
+      await setSuccessMessage("✅ Product added to cart successfully!");
       setErrorMessage(""); // <-- here
+      navigate("/cart");
     } catch (e) {
       console.log(e);
       setErrorMessage(

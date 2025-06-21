@@ -73,11 +73,11 @@ const OrdersManagement = () => {
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}>
             <option value="all">Toutes</option>
-            <option value="pending">En attente</option>
-            <option value="processing">En traitement</option>
-            <option value="shipped">Expédiée</option>
-            <option value="Delivered">Livrée</option>
-            <option value="cancelled">Annulée</option>
+            <option value="pending">pending</option>
+            <option value="processing">processing</option>
+            <option value="shipped">shipped</option>
+            <option value="Delivered">Delivered</option>
+            <option value="cancelled">cancelled</option>
           </select>
         </div>
       </div>
@@ -107,7 +107,6 @@ const OrdersManagement = () => {
                   <p className={styles.customerName}>
                     <strong>Client:</strong> {order.user?.name}
                   </p>
-                  <strong>Client:</strong>
                   <p className={styles.customerEmail}>{order.user?.email}</p>
                   <p className={styles.customerEmail}>{order.user?.numero}</p>
                 </div>
@@ -121,11 +120,11 @@ const OrdersManagement = () => {
                     onChange={(e) =>
                       updateOrderStatus(order.id, e.target.value)
                     }>
-                    <option value="pending">En attente</option>
-                    <option value="processing">En traitement</option>
-                    <option value="shipped">Expédiée</option>
-                    <option value="Delivered">Livrée</option>
-                    <option value="cancelled">Annulée</option>
+                    <option value="pending">Pending</option>
+                    <option value="processing">Processing</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="Delivered">Delivered</option>
+                    <option value="cancelled">cancelled</option>
                   </select>
                 </div>
               </div>
